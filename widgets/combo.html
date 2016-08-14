@@ -1,0 +1,260 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <script type="text/javascript" src="combo.js"></script>
+<style>
+  
+body
+{
+    margin: 5px;
+    font-size: 11px;
+    font-family: Verdana;
+}
+
+pre
+{
+    background-color: #ccc;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 12px;
+}
+
+pre.i
+{
+    font-size: 11px;
+    display: inline;
+    padding: 0;
+}
+
+.cd
+{
+    margin: 10px;
+}
+
+.combo_input
+{
+    width: 200px;
+    border: 1px solid gray;
+    padding: 2px;
+    font-size: 12px;
+}
+
+.combo_input_2
+{
+    width: 150px;
+    border: 1px solid gray;
+    padding: 2px;
+    font-size: 10px;
+    font-family: Verdana;
+    background-color: #ececec;
+}
+
+.swc
+{
+    background-color: #ccc;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+.opt
+{
+    padding: 2px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    cursor: pointer;
+    background-color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+This is the description of ComboBox script, which allows to create combined text and select fields.<br>
+What you need to create combo box: include combo.js and create an HTML element, which will contain
+the box.<br>
+Script was tested in IE 6, FF 1.5, Opera 9.
+
+<p><b>1. Simplest example, one string:</b></p>
+<div class="cd" id="div1"></div>
+<script type="text/javascript">
+document.getElementById('div1').appendChild(new ComboBox(['option 1', 'option 2', 'option 3']).getDOM());
+</script>
+
+<pre>
+document.getElementById('div1').appendChild(new ComboBox(['option 1', 'option 2', 'option 3']).getDOM());
+</pre>
+
+To make it more clear:
+
+<pre>
+var options = new Array('option 1', 'option 2', 'option 3');
+var Combo = new ComboBox(options);
+var container = document.getElementById('div1');
+container.appendChild(Combo.getDOM());
+</pre>
+
+<b>2. More complicated example:</b>
+
+<div class="cd" id="div2"></div>
+
+<script type="text/javascript">
+
+var Combo = new ComboBox();
+
+Combo.fill = false;
+
+Combo.container_class_name  = 'combo';
+Combo.input_class_name      = 'combo_input';
+Combo.switch_class_name     = 'swc';
+Combo.option_class_name     = 'opt';
+
+Combo.options_callback  = 'optionsCallback';
+
+document.getElementById('div2').appendChild(Combo.getDOM());
+
+</script>
+
+<pre>var Combo = new ComboBox();
+
+Combo.fill = false;
+
+Combo.container_class_name  = 'combo';
+Combo.input_class_name      = 'combo_input';
+Combo.switch_class_name     = 'swc';
+Combo.option_class_name     = 'opt';
+
+Combo.options_callback  = 'optionsCallback';
+
+document.getElementById('div2').appendChild(Combo.getDOM());
+</pre>
+
+This example uses some CSS by assiging classes to object's properties.<br>
+List of options is not passed to the object itself, but is retrieved from callback function,
+<pre class="i">optionsCallback()</pre> (<pre class="i">Combo.options_callback  = 'optionsCallback';</pre>).
+This is test function, which just returns list of countries, but it might do anything - make AJAX
+calls to retrieve data from DB, etc. It just has to return array.<br>
+
+<pre>
+var countries = ['Afghanistan', 'Albania', 'Algeria', ... 'Yemen', 'Zambia', 'Zimbabwe'];
+
+function optionsCallback()
+{
+    return countries;
+}
+
+</pre>
+
+<pre class="i">Combo.fill = false;</pre> tells object not to show list of matches while user types
+something into text input. So this instance of ComboBox can just show full list of values on clicking
+the toggle button.
+
+<p><b>3. One more example:</b></p>
+
+<div class="cd" id="div3"></div>
+
+<pre>
+var Combo = new ComboBox();
+
+Combo.show_switch = false;
+Combo.fill_delay  = 500;
+
+Combo.container_class_name  = 'combo';
+Combo.input_class_name      = 'combo_input_2';
+Combo.switch_class_name     = 'swc';
+Combo.option_class_name     = 'opt';
+
+Combo.set_callback      = 'setCallback';
+Combo.fill_callback     = 'fillCallback';
+
+document.getElementById('div3').appendChild(Combo.getDOM());
+</pre>
+
+In this example theres no switch that show full list (<pre class="i">Combo.show_switch = false;</pre>),
+it's userfull when this list is too big to show it on the page. Instead, this ComboBox instance
+shows list of mathes as user types something into the text input. This list will appear with a
+certain delay after last pressed key (<pre class="i">Combo.show_switch = false;</pre>, in ms)<br>
+This example shows full power of using callback function. It doesn't load any options list - because
+there's no need to show it. But after user types something into text input, ComboBox passes current
+text input value to <pre class="i">fillCallback()</pre> function
+(<pre class="i">Combo.fill_callback = 'fillCallback';</pre>), which should return array of matches (if any).
+This is very usefull for search - callback function makes AJAX call to DB and shows list of mathes as
+user types something into text field. In this example <pre class="i">fillCallback()</pre> just finds
+matches in countries list:
+<pre>
+function fillCallback(value)
+{
+    var list = new Array();
+    
+    for (var i = 0; i < countries.length; i++)
+    {
+        if (countries[i].toLowerCase().indexOf(value) == 0)
+        {
+            list.push(countries[i]);
+        }
+    }
+    
+    return list;
+}
+</pre>
+
+There's one more callback function, which is executed when user chooses an options from the list,
+<pre class="i">Combo.set_callback = 'setCallback';</pre>, choise is passed to it. In this example this
+function just alerts user's choise, but it can ne used in many other ways:
+<pre>
+function setCallback(value)
+{
+    alert('Your choice: ' + value);
+}
+</pre>
+
+<script type="text/javascript">
+
+var Combo = new ComboBox();
+
+Combo.show_switch = false;
+Combo.fill_delay  = 500;
+
+Combo.container_class_name  = 'combo';
+Combo.input_class_name      = 'combo_input_2';
+Combo.switch_class_name     = 'swc';
+Combo.option_class_name     = 'opt';
+
+Combo.set_callback      = 'setCallback';
+//Combo.options_callback  = 'optionsCallback';
+Combo.fill_callback     = 'fillCallback';
+
+document.getElementById('div3').appendChild(Combo.getDOM());
+
+function setCallback(value)
+{
+    alert('Your choice: ' + value);
+}
+
+var countries = ['Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Antarctica', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Congo', 'Congo (Dem. Rep.)', 'Cook Islands', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'East Timor', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'External Territories of Australia', 'Falkland Islands', 'Faroe Islands', 'Fiji Islands', 'Finland', 'France', 'French Guiana', 'French Polynesia', 'French Southern Territories', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Greenland', 'Grenada', 'Guadeloupe', 'Guam', 'Guatemala', 'Guernsey and Alderney', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Ivory Coast', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea (North)', 'Korea (South)', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Martinique', 'Mauritania', 'Mauritius', 'Mayotte', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russia', 'Rwanda', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Pierre and Miquelon', 'Saint Vincent and The Grenadines', 'Samoa', 'San Marino', 'Saudi Arabia', 'Senegal', 'Serbia and Montenegro', 'Sierra Leone', 'Slovakia', 'Slovenia', 'Smaller Territories of Chile', 'Smaller Territories of the UK', 'Solomon Islands', 'Somalia', 'South Africa', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard and Jan Mayen', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'SÚ?£‡ÅÚ?™‡ÅÚ?£‡ÄÚ?£‡?o TomÚ?£‡ÅÚ?™‡ÅÚ?£‡ÄÚ?ç‡… and PrÚ?£‡ÅÚ?™‡ÅÚ?£‡ÄÚ?ç‡Õncipe', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Virgin Islands of the United States', 'Wallis and Futuna', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe'];
+
+function optionsCallback()
+{
+    return countries;
+}
+
+function fillCallback(value)
+{
+    var list = new Array();
+
+    for (var i = 0; i < countries.length; i++)
+    {
+        if (countries[i].toLowerCase().indexOf(value) == 0)
+        {
+            list.push(countries[i]);
+        }
+    }
+
+    return list;
+}
+
+</script>
+
+</body>
+</html>

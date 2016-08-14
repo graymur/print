@@ -1,0 +1,14 @@
+.domTreeElement
+{
+    /*display: none;*/
+}
+
+.domTreeChildrenContainer
+{
+    display: none;
+}
+
+.domTreeSwitch
+{
+    cursor: pointer;
+}

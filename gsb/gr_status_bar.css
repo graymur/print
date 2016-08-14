@@ -1,0 +1,24 @@
+div#gr_sb_container
+{
+    background-color: #E7E7E7;
+    border: 2px solid #959595;
+    color: gray;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+}
+
+div#gr_sb_bar
+{
+    background-color: white;
+    border: 1px solid gray;
+    overflow: hidden;
+    height: 10px;
+    text-align: left;
+}
+
+div#gr_sb_pointer
+{
+    background-color: #E7E7E7;
+}

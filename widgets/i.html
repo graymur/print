@@ -1,0 +1,250 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <script type="text/javascript" src="incr_box.js"></script>
+<style>
+  
+body
+{
+    margin: 5px;
+    font-size: 11px;
+    font-family: Verdana;
+}
+
+pre
+{
+    background-color: #ccc;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 12px;
+}
+
+pre.i
+{
+    font-size: 11px;
+    display: inline;
+    padding: 0;
+}
+
+.ibox_container
+{
+    padding: 3px;
+    background-color: #ccc;
+    float: left;
+    border: 1px solid gray;
+}
+
+.ibox_input
+{
+    border: 1px solid gray;
+    width: 25px;
+    font-family: Georgia;
+    font-size: 11px;
+    margin-right: 2px;
+    padding: 2px;
+}
+
+</style>
+</head>
+
+<body>
+
+This is the description of IncrementinbBox script, which allows to input fields with ability to increase and decrease it's value with mouse clicks.<br>
+Script was tested in IE 6, FF 1.5, Opera 9.<br>
+
+<br>
+
+<b>Simplest example:</b><br><br>
+
+
+<div id="ib1"></div>
+<div style="clear: both"></div>
+
+<script type="text/javascript">
+(new IncrementingBox).appendTo('ib1');
+</script>
+
+<pre>
+(new IncrementingBox).appendTo('ib1');
+</pre>
+
+<b>Script allows</b> to set default value, the increment value, maximum and minimun values:<br><br>
+
+<div id="ib2"></div>
+<div style="clear: both"></div>
+
+<script type="text/javascript">
+var IBox = new IncrementingBox;
+IBox.default_value   = 0.5;
+IBox.increment_value = 0.1;
+IBox.min             = 0;
+IBox.max             = 1.5;
+
+IBox.appendTo('ib2');
+</script>
+
+<br>
+
+In this example default value is 1.5, increment value (the value which will be added or
+subtracted) is 0.1, minimum value is 0, maximum - 1.5<br>
+
+<pre>
+var IBox = new IncrementingBox;
+IBox.default_value   = 0.5;
+IBox.increment_value = 0.1;
+IBox.min             = 0;
+IBox.max             = 1.5;
+
+IBox.appendTo('ib2');
+</pre>
+
+<b>Script also allows</b> to assing CSS classes to input field, container of array images, set
+event handlers for input field and define a function, that will be executed every time the value
+is changed by clicking arrows or typing directly into the input field.<br><br>
+
+
+<div id="ib3"></div>
+<input type="text" id="in1" style="margin-left: 5px; vertical-align: middle;" maxlength="4" />
+<div style="clear: both"></div>
+
+<script type="text/javascript">
+
+function mouseOverHandler(e)
+{
+    if (isIE) e = window.event;
+    if (isMoz) e.srcElement = e.target;
+    
+    e.srcElement.style.backgroundColor = 'black';
+    e.srcElement.style.color = 'white';
+}
+
+function mouseOutHandler(e)
+{
+    if (isIE) e = window.event;
+    if (isMoz) e.srcElement = e.target;
+
+    e.srcElement.style.backgroundColor = 'white';
+    e.srcElement.style.color = 'black';
+}
+
+function incrementCallback()
+{
+    document.getElementById('in1').value = currentIBox.value * currentIBox.value;
+}
+
+var IBox = new IncrementingBox;
+IBox.default_value   = 1;
+IBox.increment_value = 0.2;
+IBox.min             = 0;
+IBox.max             = 5;
+
+IBox.input_class_name     = 'ibox_input';
+IBox.container_class_name = 'ibox_container';
+
+IBox.input_onmouseover = mouseOverHandler;
+IBox.input_onmouseout  = mouseOutHandler;
+
+IBox.onIncrementCallback = 'incrementCallback';
+
+IBox.appendTo('ib3');
+</script>
+
+<br>
+
+In this example CSS classes for input and contaier are assigned, handlers for onMouseOver and
+onMouseOut event for input field are set, and also, the function that is executed on every change
+in input field is defined, <pre class="i">IBox.onIncrementCallback = 'incrementCallback'</pre>.
+
+<br>
+
+In this example this function takes current value of incrementing box, and puts its squared value into the
+next input field.
+
+<pre>
+var IBox = new IncrementingBox;
+IBox.default_value   = 1;
+IBox.increment_value = 0.2;
+IBox.min             = 0;
+IBox.max             = 5;
+
+IBox.input_class_name     = 'ibox_input';
+IBox.container_class_name = 'ibox_container';
+
+IBox.input_onmouseover = mouseOverHandler;
+IBox.input_onmouseout  = mouseOutHandler;
+
+IBox.onIncrementCallback = 'incrementCallback';
+
+IBox.appendTo('ib3');
+
+function mouseOverHandler(e)
+{
+    if (isIE) e = window.event;
+    if (isMoz) e.srcElement = e.target;
+    
+    e.srcElement.style.backgroundColor = 'black';
+    e.srcElement.style.color = 'white';
+}
+
+function mouseOutHandler(e)
+{
+    if (isIE) e = window.event;
+    if (isMoz) e.srcElement = e.target;
+
+    e.srcElement.style.backgroundColor = 'white';
+    e.srcElement.style.color = 'black';
+}
+
+function incrementCallback()
+{
+    document.getElementById('in1').value = currentIBox.value * currentIBox.value;
+}
+
+</pre>
+
+<b>Another usefull method</b> of the script is <pre class="i">.replace(element_id)</pre>,
+it might be used when you need to replace regular input value with incrementing. For example, we
+following HTML:
+
+<pre>
+&lt;div&gt;
+  &lt;input type="text" id="in2" /&gt;
+  &lt;input type="button" value="Submit"&gt;
+&lt;/div&gt;
+</pre>
+
+and we need to have incrementing box in the place of regular. In this case, you can use <pre class="i">.replace(element_id)</pre>
+method:
+
+<pre>
+var IBox = new IncrementingBox;
+IBox.replace('in2');
+</pre>
+
+Here's the original HTML:<br>
+
+
+<div>
+  <input type="text" />
+  <input type="button" value="Submit">
+</div><br>
+
+
+And it's altered version:<br>
+
+<div>
+  <input type="text" id="in2" />
+  <input type="button" value="Submit">
+</div>
+
+<script type="text/javascript">
+var IBox = new IncrementingBox;
+IBox.replace('in2');
+</script>
+<br>
+
+New incrementing field will inherit "name", "id" and "class" properties from the original one,
+so HTML forms will work same as before.
+
+</body>
+</html>

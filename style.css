@@ -1,0 +1,560 @@
+body
+{
+    /*z-index:-100;*/
+    margin: 0;
+    padding: 0;
+}
+
+a
+{
+    color: blue;
+}
+
+body, table, input, select, textarea
+{
+    font-family: Tahoma;
+    font-size: 10px;
+}
+
+input, select
+{
+    vertical-align: middle;
+}
+
+#toolbar
+{
+    padding: 5px;
+}
+
+#toolbar img
+{
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#sidebar
+{
+    width: 180px;
+    position: absolute;
+}
+
+#mainbar
+{
+    margin-left: 200px;
+    margin-top: 10px;
+}
+
+.a
+{
+    cursor: pointer;
+    color: blue;
+}
+
+.img_align
+{
+    width: 22px;
+    height: 22px;
+}
+
+.img_toolbar
+{
+    width: 16px;
+    height: 14px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.img_align
+{
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.page
+{
+    margin-bottom: 5px;
+    margin-right: 5px;
+    background-color: gray;
+    float: left;
+    border: 1px solid gray;
+    /*overflow: hidden;*/
+}
+
+.page_body
+{
+    background-color: #FFF;
+    /*overflow: hidden;*/
+    /*border: 1px dashed black;*/
+}
+
+.options table td
+{
+    vertical-align: top;
+}
+
+.page_number
+{
+    position: absolute;
+    float: left;
+}
+
+.text_block
+{
+    float: left;
+    border: 1px solid blue;
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+    cursor: pointer;
+}
+
+.image_block
+{
+    float: left;
+    border: 1px solid red;
+    overflow: hidden;
+    position: relative;
+	background-color: white;
+	cursor: pointer;
+}
+
+#selected_page
+{
+    z-index:-2;
+    border: 2px solid red;
+    background-color: #fff;
+}
+
+#model
+{
+    z-index:-10;
+}
+
+.block_list_element
+{
+    color: blue;
+    cursor: pointer;
+}
+
+.block_delete
+{
+    float: left;
+}
+
+.resize_rect
+{
+    border: 1px solid black;
+    background-color: #fff;
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    /*z-index*/
+}
+
+.resize_layer
+{
+    z-index: 10000;
+}
+
+.img_cont
+{
+    float: left;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+.win_style, #images_list, #tree, #coordinates
+{
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    border-right: 2px solid gray;
+    border-bottom: 2px solid gray;
+    background-color: #E9E9E9;
+}
+
+.hr
+{
+    background-color: black;
+    margin: 3px 0 3px 0;
+    color: black;
+}
+
+ul.sidebar_opt_list
+{
+    list-style: none;
+    padding-left: 10px;
+    margin: 5px 0 5px 0;
+}
+
+a.sb_link
+{
+    display: block;
+    width: 150px;
+    padding: 2px 2px 2px 5px;
+}
+
+a.sb_link:hover
+{
+    background-color: #F2F2F2;
+}
+
+.sb_options
+{
+    display: none;
+    margin: 5px;
+    background-color: #F2F2F2;
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+
+.button_up, .button_down
+{
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.button_up
+{
+    border-left: 1px solid gray;
+    border-right: 2px solid black;
+    border-top: 1px solid gray;
+    border-bottom: 2px solid black;
+}
+
+.button_down
+{
+    border-right: 1px solid gray;
+    border-left: 2px solid black;
+    border-bottom: 1px solid gray;
+    border-top: 2px solid black;
+}
+
+#images_list
+{
+    /*z-index: 10002;*/
+    position: absolute;
+    padding: 0 10px 10px 10px;
+    cursor: move;
+}
+
+#tree
+{
+    position: absolute;
+    /*z-index: 10002;*/
+    padding: 5px;
+    width: 300px;
+}
+
+.tree_switch
+{
+    vertical-align: middle;
+    cursor: pointer;
+    display: block;
+    float: left;
+    margin-right: 3px;
+    margin-top: 2px;
+}
+
+.tree_options
+{
+    display: block;
+    background-color: #F2F2F2;
+    border: 1px solid #ccc;
+    width: 96%;
+    margin: 3px 0 1px 2%;
+    padding: 2px;
+}
+
+.tree_sub_options
+{
+    display: none;
+    margin-left: 4%;
+    width: 93%;
+    width: expression(99 + '%');
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+
+.tree_page_bg
+{
+    float: left;
+    border: 1px solid #ccc;
+    width: 20px !important;
+    height: 10px !important;
+}
+
+.tree_block_name
+{
+}
+
+.tree_block_name input
+{
+    width: 90%;
+}
+
+#coordinates
+{
+    width: 120px;
+    position: absolute;
+    display: none;
+    /*z-index: 10003;*/
+}
+
+#vertical_ruler, #horisontal_ruler
+{
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    overflow: hidden;
+    /*z-index: 40000;*/
+}
+
+.ruler_hairline
+{
+    position: absolute;
+    float: left;
+    background-color: black;
+    overflow: hidden;
+    /*z-index: 10002;*/
+}
+
+.ruler_number
+{
+    position: absolute;
+    float: left;
+    color: black;
+    font-size: 8px !important;
+    font-weight: bold;
+
+}
+
+.tree_combo_container
+{
+    display: inline;
+}
+
+.tree_combo_input
+{
+    border: 1px solid gray;
+    padding: 2px;
+    width: 95px;
+}
+
+.tree_combo_switch
+{
+    background-color: #ccc;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.tree_combo_options
+{
+    z-index: 10005;
+}
+
+.tree_combo_option
+{
+    padding: 2px;
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    cursor: pointer;
+    z-index: 10005;
+    background-color: white;
+}
+
+.tree_page_margins
+{
+    float: left;
+}
+
+.tree_page_margins span
+{
+    margin-right: 2px;
+}
+
+.tree_page_margins input
+{
+    border: 1px solid gray;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.margin_info
+{
+    background-color: white;
+    border: 1px solid black;
+    font-weight: bold;
+    display: none;
+    position: absolute;
+    padding: 1px;
+}
+
+.popup
+{
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    border-right: 2px solid gray;
+    border-bottom: 2px solid gray;
+    background-color: #E9E9E9;
+    position: absolute;
+    padding: 5px;
+    cursor: move;
+}
+
+.window_buttons
+{
+    position: absolute;
+    padding-bottom: 2px;
+}
+
+.window_buttons img
+{
+    margin-left: 2px;
+    border: 0;
+    cursor: pointer;
+}
+
+.tip
+{
+    position: absolute;
+    width: 400px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+.tip div
+{
+    margin-bottom: 5px;
+    text-align: justify;
+    font-family: Georgia;
+    font-size: 12px;
+}
+
+.tip input
+{
+    border: 1px solid #CCC;
+    font-family: Georgia;
+    background-color: white;
+    font-size: 12px;
+}
+
+.increment_input
+{
+    width: 25px;
+}
+
+.coord_select
+{
+    margin-left: 2px;
+}
+
+.popup_background
+{
+    background-color: black;
+    position: absolute;
+    filter: alpha(opacity=30);
+    opacity: 0.30;
+}
+
+#selected_info
+{
+    width: 170px;
+    display: none;
+    background-color: #ececec;
+    border-bottom: 1px solid black;
+    position: absolute;
+    left: 5px;
+}
+
+#selected_info table
+{
+    width: 50%;
+    margin: 5px 0 2px 5px;
+}
+
+#selected_info a
+{
+    display: block;
+    text-align: right;
+    margin-bottom: 2px;
+    text-decoration: none;
+}
+
+#selected_margins_info, #selected_block_size, #selected_block_pos
+{
+    border-top: 1px solid black;
+    padding-top: 5px;
+    padding: 3px;
+}
+
+.block_delete_button
+{
+    position: absolute;
+    border: 0;
+}
+
+#tabslist
+{
+    position: absolute;
+    left: 0;
+    top : 0;
+    width: 180px;
+    padding: 0 10px;
+}
+
+#tabslist table .switch
+{
+    width: 7px;
+    vertical-align: top;
+}
+
+.tab
+{
+    border: 1px solid;
+    background-color: white;
+    width: 100px;
+    display: none;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.pointer
+{
+    cursor: pointer;
+}
+
+#blockNameDragElement
+{
+    position: absolute;
+    padding: 3px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+#blockNameDragTip
+{
+    position: absolute;
+    padding: 3px;
+    background-color: white;
+    font-weight: bold;
+    border: 1px solid black;
+    float: left;
+}
