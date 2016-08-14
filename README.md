@@ -1,0 +1,1 @@
+Prehistoric javascript code from 2005-2006. Before jQuery, Carl! Ambitious but stupid attempt to create Google Docs before Google. Amazingly, some of it still works in modern browsers: http://graymur.net/p/m/
